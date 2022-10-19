@@ -20,6 +20,13 @@ class Game:
 
     def main_loop(self):
         while self.game_over == False:
+            for evt in pygame.event.get(pygame.KEYDOWN):
+                if evt.key == pygame.K_ESCAPE:
+                    self.game_over = True
+
+            for evt in pygame.event.get(pygame.QUIT):
+                self.game_over = True
+
             self.turret.draw(self.surface)
             pygame.display.update()
 
