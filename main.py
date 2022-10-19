@@ -23,10 +23,15 @@ class Game:
             for evt in pygame.event.get(pygame.KEYDOWN):
                 if evt.key == pygame.K_ESCAPE:
                     self.game_over = True
+                if evt.key == pygame.K_a or evt.key == pygame.K_LEFT:
+                    self.turret.move_left(5)
+                if evt.key == pygame.K_d or evt.key == pygame.K_RIGHT:
+                    self.turret.move_right(5)
 
             for evt in pygame.event.get(pygame.QUIT):
                 self.game_over = True
 
+            self.surface.fill((0, 0, 0))
             self.turret.draw(self.surface)
             pygame.display.update()
 
