@@ -1,7 +1,7 @@
 import pygame
 
 from turret import Turret
-
+from fruit import Fruits
 
 class Game:
     def __init__(self):
@@ -27,6 +27,7 @@ class Game:
                     self.turret.move_left(5)
                 if evt.key == pygame.K_d or evt.key == pygame.K_RIGHT:
                     self.turret.move_right(5)
+            self.Fruits.falling(1)
 
             for evt in pygame.event.get(pygame.QUIT):
                 self.game_over = True
@@ -34,7 +35,6 @@ class Game:
             self.surface.fill((0, 0, 0))
             self.turret.draw(self.surface)
             pygame.display.update()
-
 
 
 def main():
