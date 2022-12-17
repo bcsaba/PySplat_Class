@@ -12,8 +12,10 @@ class Turret(pygame.sprite.Sprite):
         surface.blit(self.image, (self.rect.x, self.rect.y))
 
     def move_left(self, displacement):
-        self.rect.x -= displacement
+        if self.rect.x - displacement > 0:
+            self.rect.x -= displacement
 
-    def move_right(self, displacement):
-        self.rect.x += displacement
+    def move_right(self, displacement, surface_width):
+        if self.rect.x + displacement < surface_width - self.rect.width:
+            self.rect.x += displacement
 

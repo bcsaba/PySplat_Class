@@ -1,23 +1,31 @@
 import pygame
 import random
 
-cordx = random.randint(0, 300)
 
-class Fruits(pygame.sprite.Sprite):
+class Fruit(pygame.sprite.Sprite):
     def __init__(self, surface_width, surface_height):
         pygame.sprite.Sprite.__init__(self)
-        self.banana = pygame.image.load("images/banana.png")
-        self.blueberry = pygame.image.load("images/blueberry.png")
-        self.cherry = pygame.image.load("images/cherry.png")
-        self.pear = pygame.image.load("images/pear.png")
-        self.raspberry = pygame.image.load("images/raspberry.png")
-        self.strawberry = pygame.image.load("images/strawberry.png")
-        self.fruits = [self.banana, self.blueberry, self.cherry, self.pear, self.raspberry, self.strawberry]
-        self.rect.x = cordx
+        self.fruits = ["raspberry", "banana", "blueberry", "cherry", "pear"]
+        choice = random.choice(self.fruits)
+        self.image = pygame.image.load(f"images/{choice}.png")
+        if choice == "blueberry":
+            self.score = -2
+        else:
+            self.score = 1
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randint(0, surface_width - self.rect.width)
         self.rect.y = 0
 
     def draw(self, surface):
         surface.blit(self.image, (self.rect.x, self.rect.y))
 
-    def falling(self, displacement):
-        self.rect.y -= displacement
+    def falling(self, displacement, max_height):
+        if self.rect.y > max_height -50:
+            self.kill()
+            return -self.score
+            print("Object killed")
+        self.rect.y += displacement
+        return 0
+
+    def get_score(self):
+        return self.score
